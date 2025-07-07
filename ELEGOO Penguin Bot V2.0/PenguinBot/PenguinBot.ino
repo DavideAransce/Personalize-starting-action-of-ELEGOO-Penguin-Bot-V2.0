@@ -257,7 +257,7 @@ public:
     {
         ampMode(HT6871_PIN, HIGH);
         stopPlay();
-        volume = 25; //volume del robot eeeeeeeeeeee
+        volume = 25; //Penguinbot Volume: lowest 0 / highest 25
     }
 
 private:
@@ -1045,33 +1045,33 @@ void dance4()
 }
 void start()
 {
+    mp3.stopPlay();                         //mp3.stopPlay(); idk why it is putted multiple times I just leaved it as it was
+    delay(10);
+    mp3.stopPlay();
+    servoAttach();                           //without this the legs don't start
+    goingUp(t);                              //default action (this is where the bot goes on its toes)
+    servoDetach();                           //needed to "close" the servos action
+    delay(10);
+    mp3.stopPlay();
+    delay(1000);                             //I needed a second of delay before the audio, can be deleted
+    mp3.playSong(1, mp3.volume);          //audio files in SD card must be named with numbers,  i.e. 1 equals to "0001_start.mp3", the startup sound, but you only need the "0001" part
+    startDance();                         //without this the audio doesn't start
+    delay(35000);                         //you need to manually insert audio length in milliseconds, i.e. mine was 35 seconds
+    mp3.stopPlay();                           //mp3.stopPlay(); this one is actually useful bc it's needed to stop the audio
+    delay(10);
     mp3.stopPlay();
     delay(10);
     mp3.stopPlay();
+    delay(10);
     servoAttach();
-    goingUp(t);
-    servoDetach();
-    delay(10);
-    mp3.stopPlay();
-    delay(1000);
-    mp3.playSong(1, mp3.volume);          //1 è il file della voce nella scheda SD
-    startDance();                         //serve a far partire la voce perchè si
-    delay(35000);                         //durata dell'audio in millisecondi
-    mp3.stopPlay();
-    delay(10);
-    mp3.stopPlay();
-    delay(10);
-    mp3.stopPlay();
-    delay(10);
-    servoAttach();
-    goingUp(t);
+    goingUp(t);                           //same as the first: the bot goes on its toes 
     servoDetach();
 }
 
 void startDance()
 {
     servoAttach();
-    //lateral_fuerte(1, t);
+    //lateral_fuerte(1, t);                 //default dance moves, I didn't need it to dance so I deactivated them
     //lateral_fuerte(0, t);
     goingUp(t);
     servoDetach();
